@@ -1,0 +1,44 @@
+	<!-- Load style.css in plugin -->
+	<!-- <link rel="stylesheet" type="text/css" href="<?php //echo PLUGIN_URL.'/myplugin/assets/css/style.css' ?>"/>
+	Load js file in plugin
+	<script src="<?php // echo PLUGIN_URL.'/myplugin/assets/js/scripts.js' ?>"></script>
+ -->
+<?php
+
+echo "<h2>This is my menu . <table>
+				<tr>
+
+				<td>name</td>
+				<td>lastname</td>
+				<td>mobile</td>
+
+				</tr>
+					</table></h2> ";
+echo  "<h1>hello deepak shukla</h1>";
+
+?>
+
+<img src="<?php echo PLUGIN_URL.'/myplugin/assets/images/deepak.jpg' ?>" style="height:360px; width: 400px; "/>
+
+
+
+-----------------------End---------------------------
+
+
+// Other file all_page.php in plugin's view folder to execute in main plugin files.
+
+<?php
+
+
+echo "<h1>this my all pages menu items"."<br/>";
+
+echo "<h1>this my all pages menu items"."<br/>";
+
+echo "<h1>this my all pages menu items"."<br/>";
+
+echo "<h1>this my all pages menu items"."<br/>";
+
+echo "<h1>this my all pages menu items"."<br/>";
+
+
+?>
