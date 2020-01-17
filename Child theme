@@ -1,0 +1,130 @@
+Crete a child theme in wordpress requried style.css and fumction.php to run child theme 
+
+1. style.css
+
+/*
+ Theme Name:   Twenty Seventeen Child
+ Description:  Twenty Fifteen Child Theme
+ Author:  DEEPAK SHUKLA . H ;
+ Template:    twentyseventeen
+*/
+
+
+/*Loading css from parent theme to child theme via css */
+/*@import url("../twentyseventeen/style.css");*/
+
+2.function.php
+
+
+<?php
+
+add_action( 'wp_enqueue_scripts', 'my_theme_enqueue_styles' );
+
+function my_theme_enqueue_styles() {
+	// Load preant theme css to child theme includes using with function. action hooks
+   wp_enqueue_style( 'parent-style', get_template_directory_uri() . '/style.css' );
+    wp_get_theme()->get('Version');
+
+	// To use this function load child theme css  
+   // wp_enqueue_style('child-style',get_stylesheet_uri());
+ 	
+ 	// wp_enqueue_scripts('test.js', get_stylesheet_uri().'/test.js');	
+
+}
+
+add_filter('the_title', 'first_character_capital');
+function first_character_capital($title){
+return strtoupper($title); 
+}
+
+
+
+
+// function register_my_custom_menu_page() {  NOTE  :- THIS FUNCTION USED FOR REGISTER MENU ITEMS IN ADMIN DESCBOARD.
+//  add_menu_page( 'custom menu title', 'custom menu', 'manage_options', 'myplugin/myplugin-admin.php', '', 'dashicons-admin-site', 6 );
+// }
+// add_action( 'admin_menu', 'register_my_custom_menu_page' );
+
+function excerpt_length_example( $words ) {
+ return 15;
+}
+add_filter( 'excerpt_length', 'excerpt_length_example' );
+
+function publish_post_tweet($post_ID) {
+  global $post;
+  // Code to send a tweet with post info
+}
+add_action('publish_post', 'publish_post_tweet');
+
+
+function create_my_widget() {
+ register_sidebar(array(
+ 'name' => __( 'My Sidebar', 'mytheme' ), 
+ 'id' => 'my_sidebar',
+ 'description' => __( 'The one and only', 'mytheme' ),
+ ));
+}
+add_action( 'widgets_init', 'create_my_widget' );
+
+
+
+
+// Add Widget Areas
+function ourWidgetsInit() {
+	
+	register_sidebar( array(
+		'name' => 'Sidebar',
+		'id' => 'sidebar1',
+		'before_widget' => '<div class="widget-item">',
+		'after_widget' => '</div>',
+		'before_title' => '<h2 class="widget-title">',
+		'after_title' => '</h2>',
+	));
+	
+	register_sidebar( array(
+		'name' => 'Footer Area 1',
+		'id' => 'footer1',
+		'before_widget' => '<div class="widget-item">',
+		'after_widget' => '</div>',
+		'before_title' => '<h2 class="widget-title">',
+		'after_title' => '</h2>',
+	));
+	
+	register_sidebar( array(
+		'name' => 'Footer Area 2',
+		'id' => 'footer2',
+		'before_widget' => '<div class="widget-item">',
+		'after_widget' => '</div>',
+		'before_title' => '<h2 class="widget-title">',
+		'after_title' => '</h2>',
+	));
+	
+	register_sidebar( array(
+		'name' => 'Footer Area 3',
+		'id' => 'footer3',
+		'before_widget' => '<div class="widget-item">',
+		'after_widget' => '</div>',
+		'before_title' => '<h2 class="widget-title">',
+		'after_title' => '</h2>',
+	));
+	
+	register_sidebar( array(
+		'name' => 'Footer Area 4',
+		'id' => 'footer4',
+		'before_widget' => '<div class="widget-item">',
+		'after_widget' => '</div>',
+		'before_title' => '<h2 class="widget-title">',
+		'after_title' => '</h2>',
+	));
+	
+}
+add_action('widgets_init', 'ourWidgetsInit');
+
+
+
+
+
+
+
+
+
