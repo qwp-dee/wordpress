@@ -112,8 +112,35 @@ function deactivate_table(){
 	// 2. register_uninstall_hook
 	global $wpdb;
 	$wpdb->query("DROP table if Exists wp_custom_plugin");
+	
+	
+// Delete the page via plugin 
+ 	$the_post_id = get_option("custom_plugin_page_id");
+ 	if(!empty($the_post_id)){
+ 		wp_delete_post($the_post_id,true);
+ 	}
 
 }
 register_deactivation_hook(__FILE__,"deactivate_table");
 
 // Create Page while Plugin activate
+// Create Page while Plugin activate
+
+function create_page(){
+	//code for create page 
+	$page = array();
+	$page['post_title'] = "MY plugins";
+	$page['post_content'] = "My self i am a custom plugin my work is create a dynamic page 							 while page is activation";
+	$page['post_stetus'] = "publish";
+	$page['post_slug'] = "my plugin";
+	$page['post_type'] ="page";
+
+	$post_id = wp_insert_post($page);
+
+	add_option("custom_plugin_page_id",$post_id); 
+	// wp_option_table from the name of custom_plugin_page_id
+
+
+}
+register_activation_hook(__FILE__,"create_page");
+
