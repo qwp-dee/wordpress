@@ -1,0 +1,35 @@
+<?php
+
+//create shortcode
+
+add_shortcode('MyShortcodefunction-php','myshortcodefunction_php');
+
+	function myshortcodefunction_php(){
+
+  include_once PLUGIN_DIR_PATH."/views/shortcode.php";
+
+	echo strtoupper("<strong>here i am trying to display shortcode demo function-php with the help of hooks add_shortcode</strong>");
+	
+	}
+  
+  // custome experts 
+
+function new_excerpt_more($more) {
+   global $post;
+   return '… <a href="'. get_permalink($post->ID) . '">' . 'Read More &raquo;' . '</a>';
+   }
+   add_filter('excerpt_more', 'new_excerpt_more');
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+?>
