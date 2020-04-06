@@ -38,7 +38,7 @@ add_action("admin_menu","add_my_custom_menu");
 
 function add_new_function(){
 
-    include_once( __DIR__ . '/View/add-new.php');
+    include_once( __DIR__ . '/View/image-body.php');
  
 }
 
