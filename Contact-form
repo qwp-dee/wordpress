@@ -3,7 +3,6 @@
  *  Contact- Form-7 Displaying Title in Dropdown list
  * --------------------------------------------------------------------------- */
 
-
 function mjmeurope_post_title() {
     wpcf7_add_shortcode( 'mjmeurope_post_title', 'mjmeurope_views_post_title_shortcode_handler' );
 }
@@ -29,3 +28,21 @@ function mjmeurope_views_post_title_shortcode_handler( $tag ) {
 }
 
 // Put shortcode in contact form - [mjmeurope_post_title]
+
+
+
+
+// Contact form validation name filed 
+add_filter( 'wpcf7_validate_text*', 'custom_text_filed_validation', 20, 2 );
+if ( ! function_exists('custom_text_filed_validation') ) {   
+    function custom_text_filed_validation( $result, $tag ) {
+        if ( 'your-name' == $tag->name ) {
+            // matches any utf words with the first not starting with a number
+             $re = '/^[^\p{N}][\p{L}]*/i';
+             if (!preg_match($re, $_POST['your-name'], $matches)) {
+              $result->invalidate($tag, "This is not a valid name!" );
+            }
+        }
+        return $result;
+    }
+}
