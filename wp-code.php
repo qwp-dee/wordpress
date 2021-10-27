@@ -288,7 +288,77 @@ add_filter('nav_menu_css_class' , 'HTNnav_class' , 10 , 2);
 endif; //HTNnav_class
 
 
+// custom menu function
 
+/* stokedagency theme menu customizations.. */
+if (!function_exists('stokedagency_theme_menu_fn')) :
+	function stokedagency_theme_menu_fn(){
+	   wp_nav_menu(
+			  array(
+				    'theme_location'  => 'header',
+				    'menu'            => '',
+				    'container'       => 'div',
+				    'container_class' => 'menu-{menu slug}-container',
+				    'container_id'    => '',
+				    'menu_class'      => 'menu',
+				    'menu_id'         => '',
+				    'echo'            => true,
+				    'fallback_cb'     => 'wp_page_menu',
+				    'before'          => '',
+				    'after'           => '',
+				    'link_before'     => '',
+				    'link_after'      => '<span></span>',
+				    'items_wrap'      => '<ul class="nav--items">%3$s</ul>',
+				    'depth'           => 0,
+				    'add_li_class'  => 'nav--item',
+				    'walker'          => ''
+				)
+		);
+	}
+endif; /* End stokedagency theme menu customizations.. */
+
+/*Allow SVG image upload*/
+add_filter( 'wp_check_filetype_and_ext', function($data, $file, $filename, $mimes) {
+
+  global $wp_version;
+  if ( $wp_version !== '4.7.1' ) {
+     return $data;
+  }
+
+  $filetype = wp_check_filetype( $filename, $mimes );
+      return [
+          'ext'             => $filetype['ext'],
+          'type'            => $filetype['type'],
+          'proper_filename' => $data['proper_filename']
+        ];
+
+}, 10, 4 );
+
+if (!function_exists('stokedagency_mime_types')) :
+
+    function stokedagency_mime_types( $mimes ){
+      $mimes['svg'] = 'image/svg+xml';
+      return $mimes;
+    }
+    add_filter( 'upload_mimes', 'stokedagency_mime_types' );
+
+endif;
+
+if (!function_exists('stokedagency_fix_svg')) :
+    function stokedagency_fix_svg() {
+      echo '<style type="text/css">
+            .attachment-266x266, .thumbnail img {
+                 width: 100% !important;
+                 height: auto !important;
+            }
+            </style>';
+    }
+    add_action( 'admin_head', 'stokedagency_fix_svg' );
+endif; 
+/*Allow SVG image upload */
+
+
+//
 
 /*tag cloud*/
 function all_tag_cloud_widget_parameters($args) {
